@@ -20,8 +20,27 @@
   --radius: 18px;
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101412;
+  --bg-elev: #1a221e;
+  --ink: #f4efe6;
+  --muted: #c3b8a8;
+  --line: #314039;
+  --accent: #6ee6da;
+  --accent-soft: rgba(110, 230, 218, 0.14);
+  --on-accent: #062421;
+  --clay: #f0a07a;
+  --gold: #e3b15a;
+  --good: #8ee0b0;
+  --good-soft: rgba(142, 224, 176, 0.14);
+  --bad: #ffb4ae;
+  --bad-soft: rgba(255, 180, 174, 0.14);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
     --bg: #101412;
     --bg-elev: #1a221e;
@@ -410,6 +429,90 @@ main { padding: 28px 0 64px; }
   .modes, .grid-2, .trail { grid-template-columns: 1fr; }
   .top-inner { align-items: flex-start; padding: 10px 0; flex-direction: column; }
   .stats { justify-content: flex-start; }
+}
+
+.theme-switch {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+
+.theme-switch button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.theme-switch button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+
+.step {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  padding: 0;
+}
+
+.step.done { background: var(--accent-soft); border-color: var(--accent); }
+.step[aria-current="step"] { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+
+.terms { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+
+.term {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.term[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); }
+
+.define {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+}
+
+.recall, .inline-check {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.inline-check h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin: 0 0 8px;
+}
+
+.recall p, .define { font-family: var(--serif); font-size: 1.05rem; }
+
+.blank {
+  display: inline-block;
+  min-width: 5.5rem;
+  border-bottom: 2px solid var(--clay);
+  color: transparent;
+  user-select: none;
+}
+
+.recall.show .blank {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {
